@@ -1,0 +1,116 @@
+=== Original ordering ===
+Tree: {'A': [3, 5, 6], 'B': [2, 9, 1], 'C': [0, -1, 7]}
+Minimax root value: 3
+Minimax leaf evaluations: 9
+Alpha-beta root value: 3
+Alpha-beta leaf evaluations: 5
+Leaves saved by alpha-beta: 4
+Minimax trace:
+  Evaluate leaf A1 = 3
+  Evaluate leaf A2 = 5
+  Evaluate leaf A3 = 6
+  MIN node A returns 3
+  Evaluate leaf B1 = 2
+  Evaluate leaf B2 = 9
+  Evaluate leaf B3 = 1
+  MIN node B returns 1
+  Evaluate leaf C1 = 0
+  Evaluate leaf C2 = -1
+  Evaluate leaf C3 = 7
+  MIN node C returns -1
+  MAX root returns max(3, 1, -1) = 3
+Alpha-beta trace:
+  Enter MIN node A with alpha=-inf, beta=inf
+  Evaluate leaf A1 = 3 (leaf count=1)
+  Update A: value=3, beta=3
+  Evaluate leaf A2 = 5 (leaf count=2)
+  Update A: value=3, beta=3
+  Evaluate leaf A3 = 6 (leaf count=3)
+  Update A: value=3, beta=3
+  Return from A: 3; root best=3; alpha=3
+  Enter MIN node B with alpha=3, beta=inf
+  Evaluate leaf B1 = 2 (leaf count=4)
+  Update B: value=2, beta=2
+  PRUNE at B: beta=2 <= alpha=3; skipped leaves [9, 1]
+  Return from B: 2; root best=3; alpha=3
+  Enter MIN node C with alpha=3, beta=inf
+  Evaluate leaf C1 = 0 (leaf count=5)
+  Update C: value=0, beta=0
+  PRUNE at C: beta=0 <= alpha=3; skipped leaves [-1, 7]
+  Return from C: 0; root best=3; alpha=3
+  MAX root returns 3
+=== Reordered leaves ===
+Tree: {'A': [6, 5, 3], 'B': [9, 2, 1], 'C': [7, 0, -1]}
+Minimax root value: 3
+Minimax leaf evaluations: 9
+Alpha-beta root value: 3
+Alpha-beta leaf evaluations: 7
+Leaves saved by alpha-beta: 2
+Minimax trace:
+  Evaluate leaf A1 = 6
+  Evaluate leaf A2 = 5
+  Evaluate leaf A3 = 3
+  MIN node A returns 3
+  Evaluate leaf B1 = 9
+  Evaluate leaf B2 = 2
+  Evaluate leaf B3 = 1
+  MIN node B returns 1
+  Evaluate leaf C1 = 7
+  Evaluate leaf C2 = 0
+  Evaluate leaf C3 = -1
+  MIN node C returns -1
+  MAX root returns max(3, 1, -1) = 3
+Alpha-beta trace:
+  Enter MIN node A with alpha=-inf, beta=inf
+  Evaluate leaf A1 = 6 (leaf count=1)
+  Update A: value=6, beta=6
+  Evaluate leaf A2 = 5 (leaf count=2)
+  Update A: value=5, beta=5
+  Evaluate leaf A3 = 3 (leaf count=3)
+  Update A: value=3, beta=3
+  Return from A: 3; root best=3; alpha=3
+  Enter MIN node B with alpha=3, beta=inf
+  Evaluate leaf B1 = 9 (leaf count=4)
+  Update B: value=9, beta=9
+  Evaluate leaf B2 = 2 (leaf count=5)
+  Update B: value=2, beta=2
+  PRUNE at B: beta=2 <= alpha=3; skipped leaves [1]
+  Return from B: 2; root best=3; alpha=3
+  Enter MIN node C with alpha=3, beta=inf
+  Evaluate leaf C1 = 7 (leaf count=6)
+  Update C: value=7, beta=7
+  Evaluate leaf C2 = 0 (leaf count=7)
+  Update C: value=0, beta=0
+  PRUNE at C: beta=0 <= alpha=3; skipped leaves [-1]
+  Return from C: 0; root best=3; alpha=3
+  MAX root returns 3
+=== Edge case: one leaf per MIN child ===
+Tree: {'A': [4], 'B': [2], 'C': [5]}
+Minimax root value: 5
+Minimax leaf evaluations: 3
+Alpha-beta root value: 5
+Alpha-beta leaf evaluations: 3
+Leaves saved by alpha-beta: 0
+Minimax trace:
+  Evaluate leaf A1 = 4
+  MIN node A returns 4
+  Evaluate leaf B1 = 2
+  MIN node B returns 2
+  Evaluate leaf C1 = 5
+  MIN node C returns 5
+  MAX root returns max(4, 2, 5) = 5
+Alpha-beta trace:
+  Enter MIN node A with alpha=-inf, beta=inf
+  Evaluate leaf A1 = 4 (leaf count=1)
+  Update A: value=4, beta=4
+  Return from A: 4; root best=4; alpha=4
+  Enter MIN node B with alpha=4, beta=inf
+  Evaluate leaf B1 = 2 (leaf count=2)
+  Update B: value=2, beta=2
+  PRUNE at B: beta=2 <= alpha=4; skipped leaves []
+  Return from B: 2; root best=4; alpha=4
+  Enter MIN node C with alpha=4, beta=inf
+  Evaluate leaf C1 = 5 (leaf count=3)
+  Update C: value=5, beta=5
+  Return from C: 5; root best=5; alpha=5
+  MAX root returns 5
